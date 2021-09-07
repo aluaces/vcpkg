@@ -9,27 +9,26 @@ vcpkg_from_gitlab(
     HEAD_REF master
 )
 
-vcpkg_configure_cmake(
-    SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
+vcpkg_cmake_configure(
+    SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
         -DBUILD_TESTING=OFF
         -DEIGEN_BUILD_PKGCONFIG=ON
     OPTIONS_RELEASE
-        -DCMAKEPACKAGE_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/share/eigen3
-        -DPKGCONFIG_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/lib/pkgconfig
+        -DCMAKEPACKAGE_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/share/eigen3"
+        -DPKGCONFIG_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/lib/pkgconfig"
     OPTIONS_DEBUG
-        -DCMAKEPACKAGE_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/debug/share/eigen3
-        -DPKGCONFIG_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig
+        -DCMAKEPACKAGE_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/debug/share/eigen3"
+        -DPKGCONFIG_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig"
 )
 
-vcpkg_install_cmake()
-vcpkg_fixup_cmake_targets()
+vcpkg_cmake_install()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
-file(GLOB INCLUDES ${CURRENT_PACKAGES_DIR}/include/eigen3/*)
+file(GLOB INCLUDES "${CURRENT_PACKAGES_DIR}/include/eigen3/*")
 # Copy the eigen header files to conventional location for user-wide MSBuild integration
-file(COPY ${INCLUDES} DESTINATION ${CURRENT_PACKAGES_DIR}/include)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include ${CURRENT_PACKAGES_DIR}/debug/share)
+file(COPY ${INCLUDES} DESTINATION "${CURRENT_PACKAGES_DIR}/include")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include" "${CURRENT_PACKAGES_DIR}/debug/share")
 
-file(INSTALL ${SOURCE_PATH}/COPYING.README DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
+file(INSTALL "${SOURCE_PATH}/COPYING.README" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
