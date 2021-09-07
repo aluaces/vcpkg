@@ -15,11 +15,11 @@ vcpkg_cmake_configure(
         -DBUILD_TESTING=OFF
         -DEIGEN_BUILD_PKGCONFIG=ON
     OPTIONS_RELEASE
-        -DCMAKEPACKAGE_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/share/eigen3"
-        -DPKGCONFIG_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/lib/pkgconfig"
+        -DCMAKEPACKAGE_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/share/eigen3
+        -DPKGCONFIG_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/lib/pkgconfig
     OPTIONS_DEBUG
-        -DCMAKEPACKAGE_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/debug/share/eigen3"
-        -DPKGCONFIG_INSTALL_DIR="${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig"
+        -DCMAKEPACKAGE_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/debug/share/eigen3
+        -DPKGCONFIG_INSTALL_DIR=${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig
 )
 
 vcpkg_cmake_install()
